@@ -1,0 +1,317 @@
+webpack:
+新建一个初始化文件$npm init
+安装webpack
+$npm install webpack --save-dev
+编译文件
+webpack xxx.js xxx.bundle.js //将xxx.js编译成xxx.bundle.js
+xxx.js可以引入js、css文件
+require('aaa.js');
+require('bbb.css');
+引入css文件后，打包前需要安装文件loader依赖
+$npm install css-loader style-loader --save-dev
+require('style-loader!css-loader!bbb.css');
+这是在文件中添加指定打包依赖，还可以在命令中执行
+webpack xxx.js xxx.bundle.js --module-bind 'css=style-loader!css-loader' --watch --progress --display-modules --display-reasons
+webpack的命令
+--module-bind：模块绑定
+--watch：实时监测
+--progress：进度
+--display-modules：显示依赖的模块
+--display-reasons：显示编译的原因，使用的依赖包
+
+
+/***webpack配置文件***/
+webpack.config.js (默认名字)
+如果不是默认名，执行webpack --config webpack.dev.config.js
+
+或者在npm中修改script脚本
+"scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "webpack":"webpack --config webpack.dev.config.js"
+  }
+这样就可以运行$npm run webpack
+=>
+module.exports = {
+	entry:'./src/script/main.js',  //入口文件
+	output:{
+		path:'./dist/js',  //输出文件夹
+		filename:'bundle.js'  //输出文件名
+	}
+}
+
+
+多个文件的时候
+module.exports = {
+	entry:{
+		app:'./src/app.js',
+		search:'./src/search.js'
+	},  //入口文件
+	output:{
+		path:__dirname+'./dist',  //输出文件夹
+		filename:'js/[name]-[hash]-[chunkhash].js'  //输出文件名
+	}
+}
+
+
+html-webpack-plugin关联文件
+首先安装$npm install html-webpack-plugin --save-dev
+在webpack.config.js文件中引用
+var htmlWebpackPlugin = require('html-webpack-plugin');
+修改
+module.exports = {
+	entry:{
+		app:'./src/app.js',
+		search:'./src/search.js'
+	},  //入口文件
+	output:{
+		path:__dirname+'./dist',  //输出文件夹
+		filename:'js/[name]-[hash]-[chunkhash].js'  //输出文件名
+	},
+	plugins:{
+		new htmlWebpackPlugin({
+			filename:'index-[hash].html',  //给输出的index.html添加hash值
+			template: 'index.html',  //关联根目录的index.html
+			inject:'head'  //插入的位置
+		});
+	}
+}
+
+
+通过修改webpack.config.js中plugins的数据，可以直接在html中使用
+plugins:{
+		new htmlWebpackPlugin({
+			filename:'index-[hash].html',  //给输出的index.html添加hash值
+			template: 'index.html',  //关联根目录的index.html
+			inject:'head',  //插入的位置
+			title:'webpack.config file title',
+			date:new Date()
+		});
+	}
+
+title和date数据可以直接在index页面使用，调用方法<%= %>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title><%= htmlWebpackPlugin.options.title %></title>
+</head>
+<body>
+		<div><%= htmlWebpackPlugin.options.date %></div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--config
+
+--context
+
+--entry
+
+--module-bind
+
+--module-bind-post
+
+--module-bind-pre
+
+--output-path
+
+--output-file
+
+--output-chunk-file
+
+--output-named-chunk-file
+
+--output-source-map-file
+
+--output-public-path
+
+--output-jsonp-function
+
+--output-pathinfo
+
+--output-library
+
+--output-library-target
+
+--records-input-path
+
+--records-output-path
+
+--records-path
+
+--define
+
+--target
+
+--cache
+                  [default: true]
+--watch, -w//实时监测，简写-w
+
+--watch which closes when stdin e
+
+--watch-aggregate-timeout
+
+--watch-poll
+
+--hot
+
+--debug
+
+--devtool
+
+--progress //监测进度
+
+--resolve-alias
+
+--resolve-loader-alias
+
+--optimize-max-chunks
+
+--optimize-min-chunk-size
+
+--optimize-minimize
+
+--optimize-occurence-order
+
+--optimize-dedupe
+
+--prefetch
+
+--provide
+
+--labeled-modules
+
+--plugin
+
+--bail
+
+--profile//输出性能数据，可以看到每一步的耗时
+
+-d
+-output-pathinfo
+-p
+
+--json, -j
+
+--colors, -c//输出结果带彩色，比如：会用红色显示耗时较长的步骤
+
+--sort-modules-by
+
+--sort-chunks-by
+
+--sort-assets-by
+
+--hide-modules
+
+--display-exclude
+
+--display-modules//显示打包模块
+
+--display-chunks
+
+--display-error-details
+
+--display-origins
+
+--display-cached
+
+--display-cached-assets
+
+--display-reasons, --verbose, -v
