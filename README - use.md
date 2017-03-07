@@ -18,7 +18,7 @@
 ---
 ***
 
-[Baidu](www.baidu.com "百度一下，你就知道" )
+[Baidu](http://www.baidu.com "百度一下，你就知道" )
 [baidu][1]
 
 
@@ -35,48 +35,11 @@ he
 ```
 
 
-<span id = "jump">hehe</span>
-
 这是一个注脚测试[^footer1]。
 [^footer1]: 这是一个测试，用来阐释注脚。
 
 
 ![](http://images.cnitblog.com/blog/404392/201501/122257231047591.jpg)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
