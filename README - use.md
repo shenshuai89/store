@@ -22,7 +22,7 @@
 [baidu][1]
 
 
-[1]:(www.baidu.com)
+[1]:<http://www.baidu.com>
 
 
 >111
